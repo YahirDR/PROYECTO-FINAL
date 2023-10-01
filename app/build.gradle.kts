@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 
 }
-
 android {
     namespace = "com.juanyahirdr.proyectofinal"
     compileSdk = 34
@@ -51,6 +50,11 @@ android {
 }
 
 dependencies {
+    //ROOM DATABASE
+    val room_version = "2.5.0"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
 
     //DEPENDENCIAS DEFAULT
     implementation("androidx.core:core-ktx:1.12.0")
