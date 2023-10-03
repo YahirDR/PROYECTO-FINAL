@@ -1,11 +1,15 @@
 package com.juanyahirdr.proyectofinal
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +28,7 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,40 +38,54 @@ import org.w3c.dom.Text
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import java.text.SimpleDateFormat
+import java.time.Clock
+import java.time.LocalDateTime
+import java.util.Calendar
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ProyectoFinalTheme{
-                createNote()
+                screenCreateNote()
             }
         }
     }
 }
-//VERSION DE PUEBRA
+//################################ Pantalla: Crear Notas ################################
+//PROTOTIPO CREAR NOTA
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable //INDICA QUE ES UN ELEMENTO GRAFICO
-fun createNote(){
+fun screenCreateNote(){
     //VARIABLES:
     var titulo by remember { mutableStateOf("") }
     var body by remember { mutableStateOf("") }
 
+    val date by remember { mutableStateOf(Calendar.getInstance().time) }
+    val formatDate = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
+    val finalFormarDate = formatDate.format(date)
 
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
-        Text(text= "Titulo:")
+        Text(text= "Titulo:", fontFamily =  FontFamily(R.font.caliban))
         TextField(value = titulo, onValueChange = { titulo=it})
         Spacer(modifier = Modifier.height(16.dp))
         Text(text= "Cuerpo:")
         TextField(value = body, onValueChange = { body=it})
         Spacer(modifier = Modifier.height(16.dp))
         Text(text = "Fecha:")
+        Text(""+finalFormarDate)
         buttuns()
 
     }
 }
+
 @Composable
 fun buttuns() {
     Row( modifier = Modifier.padding(10.dp)) {
@@ -84,10 +103,12 @@ fun buttuns() {
     }
 }
 
+//########################################################################
 //La preview sirve para ver el estado de la app sin tener que iniciar el emulador
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun PreviewText(){
     //INIDICAR QUE SE QUIERE PREVISUALIZAR
-    createNote()
+    screenCreateNote()
 }
