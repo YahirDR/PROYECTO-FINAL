@@ -6,6 +6,7 @@ import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -30,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +50,20 @@ import java.util.Calendar
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
+    val notes : List<String> = listOf(
+        "Nota 1",
+        "Nota 2",
+        "Nota 3",
+        "Nota 4",
+        "Nota 5",
+        "Nota 6",
+        "Nota 7",
+        "Nota 8",
+        "Nota 9",
+        "Nota 10",
+        "Nota 11",
+        "Nota 12",
+    )
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +91,7 @@ fun screenCreateNote(){
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
-        Text(text= "Titulo:", fontFamily =  FontFamily(R.font.caliban))
+        Text(text= "Titulo:")
         TextField(value = titulo, onValueChange = { titulo=it})
         Spacer(modifier = Modifier.height(16.dp))
         Text(text= "Cuerpo:")
@@ -103,12 +121,53 @@ fun buttuns() {
     }
 }
 
-//########################################################################
+//################################ Pantalla: INICIO (Aqui se deben ver las notas creadas) ################################
+@Composable
+fun pantalla(notes : List<String>){
+    //Se usa para mostrar solo los objetos en pantalla
+    LazyColumn(){
+        items(notes){
+            item ->  ListItemRow(item)
+        }
+    }
+}
+@Composable
+fun ListItemRow(item: String){
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+
+    ) {
+        Text(item) //CONTIEN LOS VALORES DE CADA ELEMENTO DE LA LISTA
+    }
+}
+@Preview(showBackground = true)
+@Composable
+fun pantallaInicioPreview(){
+    val notes : List<String> = listOf(
+        "Nota 1",
+        "Nota 2",
+        "Nota 3",
+        "Nota 4",
+        "Nota 5",
+        "Nota 6",
+        "Nota 7",
+        "Nota 8",
+        "Nota 9",
+        "Nota 10",
+        "Nota 11",
+        "Nota 12",
+    )
+    ProyectoFinalTheme(darkTheme = true){
+        pantalla(notes)
+    }
+}
+//################################################################
 //La preview sirve para ver el estado de la app sin tener que iniciar el emulador
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun PreviewText(){
     //INIDICAR QUE SE QUIERE PREVISUALIZAR
-    screenCreateNote()
+    //screenCreateNote()
 }
