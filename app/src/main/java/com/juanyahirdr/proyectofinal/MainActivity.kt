@@ -6,6 +6,7 @@ import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
@@ -136,6 +137,8 @@ fun ListItemRow(item: String){
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .clip(shape = MaterialTheme.shapes.small)
+            .background(color = MaterialTheme.colorScheme.secondary)
 
     ) {
         Text(item) //CONTIEN LOS VALORES DE CADA ELEMENTO DE LA LISTA
