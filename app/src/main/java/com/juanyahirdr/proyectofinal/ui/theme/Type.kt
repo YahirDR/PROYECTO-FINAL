@@ -14,12 +14,18 @@ private val caliban = FontFamily(
 
 // Set of Material typography styles to start with
 val Typography = Typography(
+
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
+    ),
+     bodySmall = TextStyle(
+        fontFamily =  caliban,
+        fontWeight =  FontWeight.Medium,
+        fontSize = 25.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(

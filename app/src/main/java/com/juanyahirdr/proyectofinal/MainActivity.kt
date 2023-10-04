@@ -7,9 +7,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +25,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -70,7 +73,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ProyectoFinalTheme{
-                screenCreateNote()
+                pantalla(notes)
             }
         }
     }
@@ -126,7 +129,11 @@ fun buttuns() {
 @Composable
 fun pantalla(notes : List<String>){
     //Se usa para mostrar solo los objetos en pantalla
-    LazyColumn(){
+    LazyColumn(
+         contentPadding = PaddingValues(all = 20.dp),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
+
+    ){
         items(notes){
             item ->  ListItemRow(item)
         }
@@ -139,9 +146,17 @@ fun ListItemRow(item: String){
             .fillMaxWidth()
             .clip(shape = MaterialTheme.shapes.small)
             .background(color = MaterialTheme.colorScheme.secondary)
+            .padding(horizontal = 16.dp, vertical = 18.dp)
 
     ) {
-        Text(item) //CONTIEN LOS VALORES DE CADA ELEMENTO DE LA LISTA
+        Row {
+            Text(item,modifier = Modifier.weight(1f).fillMaxWidth(),
+                style =  MaterialTheme.typography.bodySmall
+            ) //CONTIEN LOS VALORES DE CADA ELEMENTO DE LA LISTA
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Editar")
+            }
+        }
     }
 }
 @Preview(showBackground = true)
