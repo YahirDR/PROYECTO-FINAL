@@ -2,7 +2,7 @@ package hoods.com.noteapplication.domain.repository
 
 import hoods.com.noteapplication.data.local.model.Note
 import kotlinx.coroutines.flow.Flow
-
+//Definimos los metodos que agregamos a la base de datos
 interface Repository {
     fun getAllNotes(): Flow<List<Note>>
     fun getNoteById(id:Long): Flow<Note>
