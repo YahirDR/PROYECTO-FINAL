@@ -49,10 +49,12 @@ class InicioView @Inject constructor(
             }
             .launchIn(viewModelScope)
     }
+    //DeleteNote
     fun borrarNota(notaId:Long)= viewModelScope.launch {
         // Llamamos a "deleteNoteUseCase()" para borrar una nota con el ID proporcionado.
         deleteNoteUseCase(notaId)
     }
+    //onBookMarkChange
     fun marcadorCambio(nota:Note){
         viewModelScope.launch {
             // Llamamos  a "updateNoteUseCase()" para cambiar el marcador (bookmarked) de una nota.
