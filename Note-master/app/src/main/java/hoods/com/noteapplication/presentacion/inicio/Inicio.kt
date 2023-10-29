@@ -171,6 +171,7 @@ fun notaCarta(
 @Preview(showSystemUi = true)
 @Composable
 fun previewInicio(){
+    //Agregamos notas de ejemplo
     pantallaInicio(
         estado = inicioEstado(
             notes = pantallaVista.Exito(notes)
