@@ -3,7 +3,7 @@ package hoods.com.noteapplication.data.local.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
-//CREAMOS NUESTRA BASE DE DATOS NOTES
+//CREAMOS NUESTRA BASE DE DATOS NOTE
 @Entity(tableName = "notes")
 data class Note(
     @PrimaryKey(autoGenerate = true)
