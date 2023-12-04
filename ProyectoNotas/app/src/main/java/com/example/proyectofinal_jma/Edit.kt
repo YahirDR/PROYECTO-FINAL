@@ -168,6 +168,7 @@ fun NoteInputEditForm(
             unfocusedIndicatorColor = Color.Transparent),
         singleLine= false,
         textStyle = MaterialTheme.typography.bodyMedium)
+        Text("MULTIMEDIA:")
         viewImagesEdit(viewModel = viewModel)
         viewVideosEdit(viewModel = viewModel)
         viewAudiosEdit(viewModel = viewModel)
@@ -380,7 +381,7 @@ fun TopNoteEstructureCompactEdit(
                                 viewModel.updateRecordatorios(true)
                             }
                         )
-                      
+
                     }
                 }
             }
@@ -783,8 +784,8 @@ fun RecordatorioEdit(
             viewModel.updateOptionsRecordatorios(true)
         },
         enabled=viewModel.recordatorios,
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
         if(viewModel.recordatorios){
             Icon(

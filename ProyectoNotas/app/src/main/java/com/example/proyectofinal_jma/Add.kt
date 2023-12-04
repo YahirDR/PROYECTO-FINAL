@@ -798,7 +798,7 @@ fun Recordatorio(
             viewModel.updateOptionsRecordatorios(true)
         },
         enabled=viewModel.recordatorios,
-        contentPadding = PaddingValues(0.dp),
+
         colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
 

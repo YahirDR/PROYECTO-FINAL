@@ -31,6 +31,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.rounded.Create
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -138,20 +142,12 @@ fun HomeworkCard(
                 .padding(end = dimensionResource(id = R.dimen.padding_4))
                 .sizeIn(minHeight = dimensionResource(id = R.dimen.padding_anchor_24))
         ){
+            //EDITAR
             Box(
                modifier= modifierEdit
                    .align(CenterVertically)
             ){
-                Icon(
-                    painter = painterResource(id = R.drawable.edit),
-                    contentDescription =null,
-                    modifier = modifier
-                        .width(
-                            width = 60.dp
-                        )
-                        .padding(end = 2.dp)
-                        .aspectRatio(1f),
-                    tint =MaterialTheme.colorScheme.primary)
+
             }
             Column(modifier = Modifier.weight(1f)) {
                 Row{
@@ -179,6 +175,7 @@ fun HomeworkCard(
                         modifier= modifier
                             .weight(.9f)
                             .padding(end = 3.dp))
+                    //ELIMINAR NOTA
                         Button(
                             onClick = {
                                 notaDrop=nota
@@ -192,7 +189,7 @@ fun HomeworkCard(
                                 .offset(y = -5.dp)
                         ) {
                             Icon(
-                                painter = painterResource(id = R.drawable.trash),
+                                Icons.Rounded.Delete,
                                 contentDescription =null,
                                 modifier = modifier
                                     .size(
@@ -349,109 +346,27 @@ fun App(
 
             }
         },
+        //PARTE DE ABAJO
         bottomBar = {
             Row (
-                modifier = modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
+                modifier = modifier.fillMaxWidth().padding(16.dp),
+                horizontalArrangement = Arrangement.End
             ){
-                Card (
+                Button(
+                    onClick = {
+                        navController.navigate(route = AppScreens.AddScreen.route)
+                    },
                     modifier = modifier
-                        .padding(
-                            bottom = dimensionResource(id = R.dimen.padding_anchor_16)
-                        )
-                        .clip(Shapes.small)
-                        .width(250.dp)
-                        .align(CenterVertically),
-                    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primaryContainer)
-                ){
-                    Row (
+                        .height(60.dp)
+                        .width(60.dp),
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Icon(
+                        Icons.Rounded.Create,
+                        contentDescription = null,
                         modifier = modifier
-                            .padding(dimensionResource(id = R.dimen.padding_4))
-                            .fillMaxWidth()
-                    ){
-                        Column (
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = modifier
-                                .padding(
-                                    end = dimensionResource(id = R.dimen.padding_8)
-                                )
-                                .weight(.33f)
-                        ){
-                            Button(
-                                onClick = {
-                                    navController.navigate(route = AppScreens.LanguageScreen.route)
-                                },
-                                modifier = modifier
-                                    .height(40.dp)
-                                    .width(60.dp),
-                                contentPadding = PaddingValues(0.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.translate),
-                                    contentDescription =null,
-                                    modifier = modifier
-                                        .aspectRatio(1f),
-                                    tint = MaterialTheme.colorScheme.secondary
-                                )
-                            }
-                            Text(
-                                text = stringResource(id = R.string.idioma),
-                                style = MaterialTheme.typography.bodyMedium)
-                        }
-                        Column (
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = modifier
-                                .padding(
-                                    start = dimensionResource(id = R.dimen.padding_8),
-                                    end = dimensionResource(id = R.dimen.padding_8)
-                                )
-                                .weight(.33f)
-                        ){
-                            Button(
-                                onClick = {
-                                    navController.navigate(route = AppScreens.AddScreen.route)
-                                },
-                                modifier = modifier
-                                    .height(60.dp)
-                                    .width(60.dp),
-                                contentPadding = PaddingValues(0.dp)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.plus),
-                                    contentDescription = null,
-                                    modifier = modifier
-                                        .aspectRatio(1f)
-                                )
-                            }
-                        }
-                        Column (
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = modifier.weight(.33f)
-                        ){
-                            Button(
-                                onClick = {
-                                    navController.navigate(route = AppScreens.MainScreen.route)
-                                },
-                                modifier = modifier
-                                    .height(40.dp)
-                                    .width(60.dp),
-                                contentPadding = PaddingValues(0.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.home),
-                                    contentDescription =null,
-                                    modifier = modifier
-                                        .aspectRatio(1f),
-                                    tint = MaterialTheme.colorScheme.secondary
-                                )
-                            }
-                            Text(
-                                text = stringResource(id = R.string.principal),
-                                style = MaterialTheme.typography.bodyMedium)
-                        }
-                    }
+                            .aspectRatio(1f)
+                    )
                 }
             }
         }
