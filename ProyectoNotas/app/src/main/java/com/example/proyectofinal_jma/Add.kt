@@ -29,6 +29,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.outlined.PlayArrow
+import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -63,6 +72,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
@@ -140,7 +150,7 @@ fun NoteEntryBody(
         onValueChange =  onNoteValueChange,
         viewModel = viewModelPhoto)
 }
-
+//CUERPO
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -161,6 +171,7 @@ fun NoteInputForm(
             unfocusedIndicatorColor = Color.Transparent),
         singleLine= false,
         textStyle = MaterialTheme.typography.bodyMedium)
+    Text("MULTIMEDIA:")
     viewImages(viewModel = viewModel)
     viewVideos(viewModel = viewModel)
     viewAudios(viewModel = viewModel)
@@ -190,24 +201,28 @@ fun AddNoteHomework(
             }
         },
         bottomBar = {
+
             Row (
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ){
-                Row ( modifier =modifier.weight(.25f)){
+
+                Column ( modifier =modifier.weight(.25f)){
                 ImageCapture(viewModel = viewModel, modifier = modifier)
+
                 }
-                Row ( modifier =modifier.weight(.25f)){
+                Column ( modifier =modifier.weight(.25f)){
                     VideoCapture(viewModel = viewModel, modifier = modifier)
                 }
-                Row ( modifier =modifier.weight(.25f)){
+                Column ( modifier =modifier.weight(.25f)){
                     AudioCapture(viewModel = viewModel, modifier = modifier)
                 }
-                Row ( modifier =modifier.weight(.25f)){
+                Column ( modifier =modifier.weight(.25f)){
                     Recordatorio(viewModel = viewModel, modifier = modifier)
                 }
-
             }
+
+
         }
     ) {
         Add(contentPadding = it,viewModel)
@@ -236,9 +251,9 @@ fun TitleTextNote(
             onValueChange(noteDetails.copy(titulo = it))
         },
         modifier = Modifier
-            .padding(top = 4.dp)
+            .padding(top = 11.dp)
             .fillMaxWidth(),
-        shape = Shapes.large,
+        shape = Shapes.extraLarge,
         colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
@@ -265,6 +280,32 @@ fun TopNoteEstructureCompact(
             horizontalArrangement = Arrangement.Center
         ){
             Column{
+                Button(
+                    onClick = {navController.navigate(route = AppScreens.MainScreen.route) },
+                    modifier = modifier
+                        .height(55.dp)
+                        .width(55.dp),
+                    contentPadding = PaddingValues(0.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                ) {
+                    Icon(
+                        Icons.Default.ArrowBack,
+                        contentDescription =null,
+                        modifier = modifier
+                            .aspectRatio(1f),
+                        tint = MaterialTheme.colorScheme.primary)
+
+                }
+            }
+            Spacer(Modifier.width(dimensionResource(id = R.dimen.padding_2)))
+            Column(
+                modifier =modifier.weight(.5f)
+            ){
+                TitleNoteEntryBody(noteUiState = viewModel.noteUiState, onNoteValueChange = viewModel::updateUiState)
+            }
+            Spacer(Modifier.width(dimensionResource(id = R.dimen.padding_2)))
+            //ACEPTAR
+            Column{
                 val message= LocalContext.current.applicationContext
                 //BOTON LISTO
                 Button(
@@ -278,42 +319,17 @@ fun TopNoteEstructureCompact(
                     modifier = modifier
                         .height(55.dp)
                         .width(55.dp),
-                    contentPadding = PaddingValues(0.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+                    contentPadding = PaddingValues(10.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.check),
+                        Icons.Default.Check,
                         contentDescription =null,
                         modifier = modifier
                             .aspectRatio(1f),
                         tint = MaterialTheme.colorScheme.primary)
                 }
-            }
-            Spacer(Modifier.width(dimensionResource(id = R.dimen.padding_2)))
-            Column(
-                modifier =modifier.weight(.5f)
-            ){
-                TitleNoteEntryBody(noteUiState = viewModel.noteUiState, onNoteValueChange = viewModel::updateUiState)
-            }
-            Spacer(Modifier.width(dimensionResource(id = R.dimen.padding_2)))
-            //CANCELAR
-            Column{
-                Button(
-                    onClick = {navController.navigate(route = AppScreens.MainScreen.route) },
-                    modifier = modifier
-                        .height(55.dp)
-                        .width(55.dp),
-                    contentPadding = PaddingValues(0.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.cancel),
-                        contentDescription =null,
-                        modifier = modifier
-                            .aspectRatio(1f),
-                        tint = MaterialTheme.colorScheme.primary)
 
-                }
             }
         }
         Spacer(Modifier.height(dimensionResource(id = R.dimen.padding_4)))
@@ -328,7 +344,7 @@ fun TopNoteEstructureCompact(
             }
             Spacer(Modifier.width(dimensionResource(id = R.dimen.padding_2)))
             Column(
-                modifier =modifier.weight(.4f)
+
             ) {
                 ExposedDropdownMenuBox(
                     modifier = modifier
@@ -363,6 +379,14 @@ fun TopNoteEstructureCompact(
                         )
                         DropdownMenuItem(
                             text = { Text(text2) },
+                            onClick = {
+                                viewModel.updateOptionNote(text2)
+                                viewModel.isExpanded=false
+                                viewModel.updateRecordatorios(true)
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text("Muy importante") },
                             onClick = {
                                 viewModel.updateOptionNote(text2)
                                 viewModel.isExpanded=false
@@ -668,11 +692,11 @@ fun ImageCapture(
             uri = ComposeFileProvider.getImageUri(context)
             cameraLauncher.launch(uri)
         },
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
         Icon(
-            painter = painterResource(id = R.drawable.gallery),
+            Icons.Default.Face,
             contentDescription = null,
             modifier = modifier
                 .aspectRatio(1f),
@@ -701,11 +725,11 @@ fun VideoCapture(
             uri = ComposeFileProvider.getVideoUri(context)
             videoLauncher.launch(uri)
         },
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
         Icon(
-            painter = painterResource(id = R.drawable.video),
+            Icons.Outlined.PlayArrow,
             contentDescription = null,
             modifier = modifier
                 .aspectRatio(1f),
@@ -725,11 +749,11 @@ fun AudioCapture(
         onClick = {
             viewModel.updateShowOptionsAudio(true)
         },
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
         Icon(
-            painter = painterResource(id = R.drawable.audio),
+            Icons.Default.Call,
             contentDescription = null,
             modifier = modifier
                 .aspectRatio(1f),
@@ -775,11 +799,12 @@ fun Recordatorio(
         },
         enabled=viewModel.recordatorios,
         contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
 
             Icon(
-                painter = painterResource(id = R.drawable.clock),
+                Icons.Rounded.DateRange,
+
                 contentDescription = null,
                 modifier = modifier
                     .aspectRatio(1f),
@@ -792,7 +817,7 @@ fun Recordatorio(
     }
 }
 
-
+//MOSTRAR VIDEO
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun viewImages(
@@ -880,9 +905,9 @@ fun viewVideos(
                                 viewModel.updateUriMostrar(uri)
                             },
                             modifier = modifier
-                                .size(width = 100.dp, height = 120.dp)
+                                .size(width = 120.dp, height = 120.dp)
                         ){
-                            Icon(painter = painterResource(id = R.drawable.video_logo), contentDescription = "")
+                            Icons.Default.PlayArrow
                         }
                     }
                 }
@@ -1031,7 +1056,7 @@ fun VideoPlayer(videoUri: Uri, context:Context) {
         modifier = Modifier.fillMaxWidth(.8f)
     )
 }
-
+//MOSTRAR
 @Composable
 fun opcionesRecordatorios(
     viewModel: NoteEntryViewModel,
@@ -1061,13 +1086,7 @@ fun opcionesRecordatorios(
                                 .weight(.5f)
                                 .padding(2.dp)
                         ) {
-                            Button(
-                                onClick = {
-                                    viewModel.updateShowReloj(true)},
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text(text = stringResource(id = R.string.definirHora))
-                            }
+
                         }
                     }
                     Text(
@@ -1076,6 +1095,13 @@ fun opcionesRecordatorios(
                     Text(
                         text = viewModel.hora,
                         modifier = Modifier.padding(5.dp))
+                    Button(
+                        onClick = {
+                            viewModel.updateShowReloj(true)},
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(text = stringResource(id = R.string.definirHora))
+                    }
                     Row(
                         modifier = Modifier.fillMaxWidth()
                     ) {

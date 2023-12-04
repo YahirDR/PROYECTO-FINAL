@@ -22,6 +22,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Call
+import androidx.compose.material.icons.rounded.DateRange
+import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -227,104 +234,17 @@ fun EditNoteHomework(
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ){
-                Card (
-                    modifier = modifier
-                        .padding(
-                            bottom = dimensionResource(id = R.dimen.padding_anchor_16)
-                        )
-                        .clip(Shapes.small)
-                        .width(250.dp)
-                        .align(Alignment.CenterVertically),
-                    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primaryContainer)
-                ){
-                    Row (
-                        modifier = modifier
-                            .padding(dimensionResource(id = R.dimen.padding_4))
-                            .fillMaxWidth()
-                    ){
-                        Column (
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = modifier
-                                .padding(
-                                    end = dimensionResource(id = R.dimen.padding_8)
-                                )
-                                .weight(.33f)
-                        ){
-                            Button(
-                                onClick = {
-                                        navController.navigate(route = AppScreens.LanguageScreen.route)
-                                },
-                                modifier = modifier
-                                    .height(40.dp)
-                                    .width(60.dp),
-                                contentPadding = PaddingValues(0.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.translate),
-                                    contentDescription =null,
-                                    modifier = modifier
-                                        .aspectRatio(1f),
-                                    tint = MaterialTheme.colorScheme.secondary
-                                )
-                            }
-                            Text(
-                                text = stringResource(id = R.string.idioma),
-                                style = MaterialTheme.typography.bodyMedium)
-                        }
-                        Column (
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = modifier
-                                .padding(
-                                    start = dimensionResource(id = R.dimen.padding_8),
-                                    end = dimensionResource(id = R.dimen.padding_8)
-                                )
-                                .weight(.33f)
-                        ){
-                            Button(
-                                onClick = {
-                                    navController.navigate(route = AppScreens.AddScreen.route)
-                                },
-                                modifier = modifier
-                                    .height(60.dp)
-                                    .width(60.dp),
-                                contentPadding = PaddingValues(0.dp)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.plus),
-                                    contentDescription = null,
-                                    modifier = modifier
-                                        .aspectRatio(1f)
-                                )
-                            }
-                        }
-                        Column (
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = modifier.weight(.33f)
-                        ){
-                            Button(
-                                onClick = {
-                                    navController.navigate(route = AppScreens.MainScreen.route)
-                                },
-                                modifier = modifier
-                                    .height(40.dp)
-                                    .width(60.dp),
-                                contentPadding = PaddingValues(0.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.home),
-                                    contentDescription =null,
-                                    modifier = modifier
-                                        .aspectRatio(1f),
-                                    tint = MaterialTheme.colorScheme.secondary
-                                )
-                            }
-                            Text(
-                                text = stringResource(id = R.string.principal),
-                                style = MaterialTheme.typography.bodyMedium)
-                        }
-                    }
+                Row ( modifier =modifier.weight(.25f)){
+                    ImageCaptureEdit(viewModel = viewModel, modifier = modifier)
+                }
+                Row ( modifier =modifier.weight(.25f)){
+                    VideoCaptureEdit(viewModel = viewModel, modifier = modifier)
+                }
+                Row ( modifier =modifier.weight(.25f)){
+                    AudioCaptureEdit(viewModel = viewModel, modifier = modifier)
+                }
+                Row ( modifier =modifier.weight(.25f)){
+                    RecordatorioEdit(viewModel = viewModel, modifier = modifier)
                 }
             }
         }
@@ -332,7 +252,7 @@ fun EditNoteHomework(
         Edit(contentPadding = it, viewModel)
     }
 }
-
+//EL BUENO
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopNoteEstructureCompactEdit(
@@ -363,14 +283,14 @@ fun TopNoteEstructureCompactEdit(
                         .height(55.dp)
                         .width(55.dp),
                     contentPadding = PaddingValues(0.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.check),
+                        Icons.Rounded.ArrowBack,
                         contentDescription =null,
                         modifier = modifier
                             .aspectRatio(1f),
-                        tint = MaterialTheme.colorScheme.primary)
+                        tint = MaterialTheme.colorScheme.inversePrimary)
                 }
             }
             Spacer(Modifier.width(dimensionResource(id = R.dimen.padding_2)))
@@ -382,7 +302,7 @@ fun TopNoteEstructureCompactEdit(
             Spacer(Modifier.width(dimensionResource(id = R.dimen.padding_2)))
             Column{
                 Button(
-                    onClick = { viewModel.updateShowCancelEdit(true)},
+                    onClick = { navController.navigate(route = AppScreens.MainScreen.route)},
                     modifier = modifier
                         .height(55.dp)
                         .width(55.dp),
@@ -395,15 +315,7 @@ fun TopNoteEstructureCompactEdit(
                         modifier = modifier
                             .aspectRatio(1f),
                         tint = MaterialTheme.colorScheme.primary)
-                    MyDialog(
-                        show = viewModel.showCancelEdit,
-                        onDismiss = { viewModel.updateShowCancelEdit(false) },
-                        onConfirm = {
-                            navController.navigate(route = AppScreens.MainScreen.route)
-                        },
-                        titulo = stringResource(id = R.string.cancelarActualización),
-                        text = stringResource(id = R.string.cancelarActualizaciontext)
-                    )
+
                 }
             }
         }
@@ -415,22 +327,11 @@ fun TopNoteEstructureCompactEdit(
             Row(
                 modifier =modifier.weight(.6f)
             ) {
-                Row ( modifier =modifier.weight(.25f)){
-                    ImageCaptureEdit(viewModel = viewModel, modifier = modifier)
-                }
-                Row ( modifier =modifier.weight(.25f)){
-                    VideoCaptureEdit(viewModel = viewModel, modifier = modifier)
-                }
-                Row ( modifier =modifier.weight(.25f)){
-                    AudioCaptureEdit(viewModel = viewModel, modifier = modifier)
-                }
-                Row ( modifier =modifier.weight(.25f)){
-                    RecordatorioEdit(viewModel = viewModel, modifier = modifier)
-                }
+
             }
             Spacer(Modifier.width(dimensionResource(id = R.dimen.padding_2)))
             Column(
-                modifier =modifier.weight(.4f)
+
             ) {
                 ExposedDropdownMenuBox(
                     modifier = modifier
@@ -471,6 +372,15 @@ fun TopNoteEstructureCompactEdit(
                                 viewModel.updateRecordatorios(true)
                             }
                         )
+                        DropdownMenuItem(
+                            text = { Text("Muy importante") },
+                            onClick = {
+                                viewModel.updateOptionNoteEdit(text2)
+                                viewModel.isExpanded=false
+                                viewModel.updateRecordatorios(true)
+                            }
+                        )
+                      
                     }
                 }
             }
@@ -688,7 +598,7 @@ fun TopNoteEstructureExpandedEdit(
             }
         }
         Column(
-            modifier =modifier.weight(.14f)
+
         ) {
             ExposedDropdownMenuBox(
                 modifier = modifier
@@ -726,6 +636,14 @@ fun TopNoteEstructureExpandedEdit(
                             viewModel.isExpanded=false
                         }
                     )
+                    DropdownMenuItem(
+                        text = { Text("Muy importate") },
+                        onClick = {
+                            viewModel.updateOptionNoteEdit(text2)
+                            viewModel.isExpanded=false
+                        }
+                    )
+
                 }
             }
         }
@@ -782,11 +700,11 @@ fun ImageCaptureEdit(
             uri = ComposeFileProvider.getImageUri(context)
             cameraLauncher.launch(uri)
         },
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
         Icon(
-            painter = painterResource(id = R.drawable.gallery),
+            Icons.Default.Face,
             contentDescription = null,
             modifier = modifier
                 .aspectRatio(1f),
@@ -816,11 +734,11 @@ fun VideoCaptureEdit(
             uri = ComposeFileProvider.getVideoUri(context)
             videoLauncher.launch(uri)
         },
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
         Icon(
-            painter = painterResource(id = R.drawable.video),
+            Icons.Rounded.PlayArrow,
             contentDescription = null,
             modifier = modifier
                 .aspectRatio(1f),
@@ -870,7 +788,7 @@ fun RecordatorioEdit(
     ){
         if(viewModel.recordatorios){
             Icon(
-                painter = painterResource(id = R.drawable.clock),
+                Icons.Rounded.DateRange,
                 contentDescription = null,
                 modifier = modifier
                     .aspectRatio(1f),
@@ -878,7 +796,7 @@ fun RecordatorioEdit(
             )
         }else{
             Icon(
-                painter = painterResource(id = R.drawable.clock),
+                Icons.Rounded.DateRange,
                 contentDescription = null,
                 modifier = modifier
                     .aspectRatio(1f),
@@ -906,22 +824,7 @@ fun viewImagesEdit(
                 modifier=modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = stringResource(id = R.string.imagenes)+viewModel.cantidad,
-                    modifier=modifier.weight(.3f))
-                Row (
-                    modifier=modifier.weight(.7f),
-                    horizontalArrangement = Arrangement.End
-                ){
-                    filesCapture(viewModel = viewModel, modifier = modifier)
-                    Button(
-                        enabled = viewModel.cantidad!=0,
-                        onClick = {
-                            viewModel.deleteLastUri()
-                        },
-                        contentPadding = PaddingValues(10.dp)) {
-                        Text(text = stringResource(id = R.string.eliminarUltimafoto))
-                    }
-                }
+
             }
             if (viewModel.hasImage || (viewModel.isEditar && !viewModel.hasImage)){
                 LazyRow(modifier = modifier
@@ -985,21 +888,7 @@ fun viewVideosEdit(
                 modifier=modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = stringResource(id = R.string.videos)+viewModel.cantidadVideos,
-                    modifier=modifier.weight(.4f))
-                Row (
-                    modifier=modifier.weight(.6f),
-                    horizontalArrangement = Arrangement.End
-                ){
-                    Button(
-                        enabled = viewModel.cantidadVideos!=0,
-                        onClick = {
-                            viewModel.deleteLastUriVideos()
-                        },
-                        contentPadding = PaddingValues(10.dp)) {
-                        Text(text = stringResource(id = R.string.eliminarUltimoVideo))
-                    }
-                }
+
             }
             if (viewModel.hasVideo || (viewModel.isEditar && !viewModel.hasVideo)){
                 LazyRow(modifier = modifier
@@ -1050,11 +939,12 @@ fun AudioCaptureEdit(
         onClick = {
             viewModel.updateShowOptionsAudio(true)
         },
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
     ){
         Icon(
-            painter = painterResource(id = R.drawable.audio),
+            Icons.Rounded.Call,
+
             contentDescription = null,
             modifier = modifier
                 .aspectRatio(1f),
@@ -1079,22 +969,7 @@ fun viewAudiosEdit(
                 modifier=modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = stringResource(id = R.string.audios)+viewModel.cantidadAudios,
-                    modifier=modifier.weight(.4f))
-                Row (
-                    modifier=modifier.weight(.6f),
-                    horizontalArrangement = Arrangement.End
-                ){
-                    Button(
-                        enabled = viewModel.cantidadAudios!=0,
-                        onClick = {
-                            viewModel.deleteLastUriAudios()
-                            viewModel.updateFileNumb(viewModel.fileNumb-1)
-                        },
-                        contentPadding = PaddingValues(10.dp)) {
-                        Text(text = stringResource(id = R.string.eliminarUltimoAudio))
-                    }
-                }
+
             }
             if (viewModel.hasAudio || (viewModel.isEditar  && !viewModel.hasAudio)){
                 LazyRow(modifier = modifier

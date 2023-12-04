@@ -16,8 +16,8 @@
     <string name="escogeTema">Escoge un tema</string>
     <string name="oscuro">Oscuro</string>
     <string name="claro">Claro</string>
-    <string name="nota">Nota</string>
-    <string name="tarea">Tarea</string>
+    <string name="nota">No importante</string>
+    <string name="tarea">Importante</string>
     <string name="escribirTexto">Escribir texto</string>
     <string name="todas">Todas</string>
     <string name="fuente">Fuente</string>
