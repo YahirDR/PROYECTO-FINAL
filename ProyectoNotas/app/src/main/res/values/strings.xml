@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">ProyectoFinal_JMA</string>
+    <string name="buscar">Buscar</string>
+    <string name="titulo">Nota Titulo</string>
+    <string name="date" translatable="false">18/09/23</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="añadir">Añadir</string>
+    <string name="hecho">Hecho</string>
+    <string name="principal">Principal</string>
+    <string name="espanol">Español</string>
+    <string name="ingles">Inglés</string>
+    <string name="temas">Temas</string>
+    <string name="papelera">Papelera</string>
+    <string name="idioma">Idioma</string>
+    <string name="escogeTema">Escoge un tema</string>
+    <string name="oscuro">Oscuro</string>
+    <string name="claro">Claro</string>
+    <string name="nota">Nota</string>
+    <string name="tarea">Tarea</string>
+    <string name="escribirTexto">Escribir texto</string>
+    <string name="todas">Todas</string>
+    <string name="fuente">Fuente</string>
+    <string name="sinNotas">Oops!\nNo existe ninguna nota</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="eliminarNota">Eliminar nota</string>
+    <string name="preguntaeliminar">¿Desea eliminar la nota seleccionada?</string>
+    <string name="cancelarRegistro">Cancelar registro</string>
+    <string name="cancelarRegistrotext">¿Deseas cancelar el registro de la nota?</string>
+    <string name="cancelarActualización">Cancelar cambios</string>
+    <string name="cancelarActualizaciontext">¿Deseas cancelar los cambios en la nota?</string>
+    <string name="tipo">Tipo</string>
+    <string name="eliminarUltimafoto">Borrar última foto</string>
+    <string name="eliminarUltimoVideo">Borrar último video</string>
+    <string name="eliminarUltimoAudio">Borrar último audio</string>
+    <string name="imagenes">Fotos: </string>
+    <string name="videos" translatable="false">Videos: </string>
+    <string name="audios" translatable="false">Audios: </string>
+    <string name="reproducir">Reproducir</string>
+    <string name="opciones">Opciones</string>
+    <string name="record_audio">Permiso para grabar</string>
+    <string name="definirDia">Fecha</string>
+    <string name="definirHora">Hora</string>
+    <string name="grabar">Grabar</string>
+    <string name="tituloAudio">Grabar audio</string>
+    <string name="contenidoAudio">Presiona para grabar</string>
+    <string name="parar">Detener</string>
+    <string name="bienvenida">Bienvenido a NOTITAS+</string>
+    <string name="tareaPend">Tarea pendiente</string>
+    <string name="Recordatorio">Recordatorio fijado para:</string>
+    <string name="mensajeRecordatorio">Tiene un recordatorio para: </string>
+    <string name="recordatorios">Recordatorios: </string>
+</resources>

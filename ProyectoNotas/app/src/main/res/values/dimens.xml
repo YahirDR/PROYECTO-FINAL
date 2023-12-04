@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_2">2dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_anchor_16">16dp</dimen>
+    <dimen name="padding_anchor_24">24dp</dimen>
+    <dimen name="padding_anchor_36">36dp</dimen>
+    <dimen name="padding_90">90dp</dimen>
+    <dimen name="anchor_64">64dp</dimen>
+    <dimen name="anchor_40">40dp</dimen>
+</resources>
